@@ -63,7 +63,7 @@ h1 { font-size: 24px; font-weight: 800; letter-spacing: -.01em; line-height: 1.2
 .aviso.error { color: var(--rojo-tinta); border-color: var(--rojo); }
 
 /* Cifras clave */
-.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 20px; }
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 20px; }
 .kpi { background: var(--superficie); border-radius: var(--radio); padding: 18px 20px; box-shadow: var(--sombra); border: 1px solid var(--borde); min-width: 0; }
 .kpi .k-lbl { font-size: 13px; color: var(--tinta-2); font-weight: 600; }
 .kpi .k-val { font-size: 34px; font-weight: 800; line-height: 1.1; margin-top: 6px; letter-spacing: -.02em; }
@@ -94,7 +94,7 @@ h1 { font-size: 24px; font-weight: 800; letter-spacing: -.01em; line-height: 1.2
 /* Barra apilada ordinal */
 .stack { display: flex; gap: 2px; height: 34px; border-radius: 6px; overflow: hidden; }
 .seg { height: 100%; min-width: 2px; position: relative; }
-.leyenda { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+.leyenda { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-top: 14px; }
 .ley { min-width: 0; }
 .ley .sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: 0; }
 .ley .n { font-size: 20px; font-weight: 800; display: block; margin-top: 2px; }
@@ -109,11 +109,20 @@ h1 { font-size: 24px; font-weight: 800; letter-spacing: -.01em; line-height: 1.2
 .col-lbls { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
 .col-lbls span { font-size: 13px; color: var(--tinta-2); text-align: center; }
 
-/* Palabras */
-.palabras { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: baseline; }
-.palabra { border-radius: 999px; padding: 4px 12px; background: var(--pista); color: var(--tinta); font-weight: 600; line-height: 1.4; }
-.palabra.top { background: var(--rojo-suave); color: var(--rojo-tinta); }
-.palabra small { font-weight: 600; color: var(--tinta-3); margin-left: 6px; font-size: 12px; }
+/* Palabras: nube centrada, tamaño y color según cuántas organizaciones mencionan cada concepto */
+.nube { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 22px; padding: 18px 8px 8px; line-height: 1.1; }
+.pal { display: inline-flex; align-items: flex-start; gap: 3px; font-weight: 700; letter-spacing: -.01em; cursor: default; white-space: nowrap; }
+.pal sup { font-size: 12px; font-weight: 700; color: var(--tinta-3); letter-spacing: 0; margin-top: .15em; }
+.pal:hover { filter: brightness(.85); }
+.pal.t1 { background: var(--rojo); color: #fff; padding: 6px 18px 8px; border-radius: 999px; font-weight: 800; }
+.pal.t1 sup { color: rgba(255,255,255,.85); }
+.pal.t2 { color: var(--rojo-tinta); font-weight: 800; }
+.pal.t3 { color: var(--o4); font-weight: 800; }
+.pal.t4 { color: var(--o2); }
+.pal.t5 { color: var(--tinta-2); font-weight: 600; }
+.pal.t5.alt { color: var(--o1); }
+.nube-ley { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin-top: 16px; font-size: 12px; color: var(--tinta-3); }
+.nube-ley i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
 
 /* Voces */
 .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -150,6 +159,7 @@ tr:last-child td { border-bottom: 0; }
 .area .track2 { grid-column: 1 / -1; display: flex; gap: 2px; height: 12px; background: var(--pista); border-radius: 4px; overflow: hidden; }
 .area .s1 { background: var(--o3); height: 100%; }
 .area .s2 { background: var(--o1); height: 100%; }
+.ley-sec { font-size: 13px; color: var(--tinta-2); font-weight: 600; margin-left: 4px; }
 .area details { margin-top: 8px; }
 .area summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--rojo-tinta); list-style: none; display: inline-flex; gap: 6px; align-items: center; }
 .area summary::-webkit-details-marker { display: none; }
@@ -178,9 +188,6 @@ tr:last-child td { border-bottom: 0; }
 @media (max-width: 980px) { .grid.tres { grid-template-columns: minmax(0, 1fr); } }
 
 /* Hallazgos */
-.hallazgos { margin-bottom: 20px; border-left: 4px solid var(--rojo); }
-.hallazgos ul { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 6px; }
-.hallazgos li { line-height: 1.5; }
 
 /* Dona */
 .dona-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 28px; }
@@ -208,12 +215,11 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
 .zigla { display: flex; align-items: center; gap: 8px; }
 .zigla i { display: inline-block; width: 64px; height: 26px; background: url("data:image/png;base64,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") no-repeat center / contain; }
 
-@media (max-width: 900px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .kpis { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 720px) {
   .grid, .voces, .voces-layout { grid-template-columns: minmax(0, 1fr); }
   .titulos { border-left: 0; padding-left: 0; }
   .marca { flex-wrap: wrap; gap: 12px; }
-  .leyenda { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .col-lbls span { font-size: 12px; }
 }
 @media (max-width: 440px) { .kpis { grid-template-columns: minmax(0, 1fr); } h1 { font-size: 21px; } }
@@ -240,10 +246,6 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
 
   <section class="kpis" id="kpis"></section>
 
-  <article class="card hallazgos" id="hallazgos" hidden>
-    <h2>Hallazgos clave</h2>
-    <ul id="hallazgos-lista"></ul>
-  </article>
 
   <div class="seccion-lbl">Diagnóstico y prioridades</div>
   <div class="grid">
@@ -258,20 +260,21 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
       <div class="cuerpo"><div class="stack" id="stack"></div><div class="leyenda" id="leyenda"></div></div>
     </article>
     <article class="card ancha">
-      <h2>Qué significa “fortalecimiento”</h2>
-      <div class="preg">Conceptos clave de cada respuesta (hasta 2 por organización). Los más repetidos, en rojo.</div>
-      <div class="cuerpo palabras" id="palabras"></div>
+      <h2>¿Qué significa “fortalecimiento”?</h2>
+      <div class="preg">Conceptos clave de cada respuesta (hasta 2 por organización). El número indica cuántas organizaciones mencionan cada concepto; cada organización cuenta una sola vez por concepto.</div>
+      <div class="nube" id="palabras"></div>
+      <div class="nube-ley" id="nube-ley"></div>
     </article>
     <article class="card ancha">
       <h2>Áreas que quieren fortalecer</h2>
       <div class="preg">Cada organización eligió una prioridad #1 y, si quiso, una #2. <span id="nota-orden"></span></div>
-      <div class="tabs" role="tablist" id="orden-prio" style="margin-top:14px"><button class="tab" role="tab" aria-selected="true" data-orden="menciones">Por menciones</button><button class="tab" role="tab" aria-selected="false" data-orden="puntaje">Por puntaje (#1 = 2 pts · #2 = 1 pt)</button></div>
-      <div class="leyenda-prio"><span><span class="sw" style="background:var(--o3)"></span>Prioridad #1</span><span><span class="sw" style="background:var(--o1)"></span>Prioridad #2</span></div>
+      <div class="tabs" role="tablist" id="orden-prio" style="margin-top:14px"><button class="tab" role="tab" aria-selected="true" data-orden="p1">Prioridad #1</button><button class="tab" role="tab" aria-selected="false" data-orden="p2">Prioridad #2</button><button class="tab" role="tab" aria-selected="false" data-orden="menciones">Por menciones</button></div>
+      <div class="leyenda-prio" id="leyenda-prio"><span><span class="sw" style="background:var(--o3)"></span>Prioridad #1</span><span><span class="sw" style="background:var(--o1)"></span>Prioridad #2</span></div>
       <div class="areas" id="areas"></div>
       <div class="ninguna" id="ninguna"></div>
     </article>
     <article class="card ancha">
-      <h2>Quién decide en qué fortalecerse</h2>
+      <h2>¿Quién decide en qué fortalecerse?</h2>
       <div class="preg">Una opción por organización</div>
       <div class="cuerpo bars" id="decide"></div>
     </article>
@@ -315,7 +318,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
       <div class="cuerpo bars" id="c-no"></div>
     </article>
   </div>
-  <p class="metodo">Cada respuesta abierta se asignó a uno o más temas al procesar los datos, y las definiciones de “fortalecimiento” se resumieron en conceptos clave. Una misma respuesta puede contar en varios temas, por eso los porcentajes pueden sumar más de 100%. Los porcentajes son sobre las organizaciones que respondieron cada pregunta. El tablero muestra solo resultados agregados: no incluye nombres, correos ni respuestas textuales.</p>
+  <p class="metodo">Cada respuesta abierta se asignó a uno o más temas al procesar los datos. Cada barra muestra cuántas organizaciones mencionan ese tema; una organización que menciona varios temas aparece en cada uno, por eso los porcentajes pueden sumar más de 100%. Los porcentajes son sobre las organizaciones que respondieron cada pregunta. Las definiciones de “fortalecimiento” se resumieron en conceptos clave. El tablero muestra solo resultados agregados: no incluye nombres, correos ni respuestas textuales.</p>
 
 
   <footer>
@@ -329,16 +332,11 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
 <script id="datos-tablero" type="application/json">{
  "meta": {
   "es_prueba": false,
-  "fuente": "export de FormAssembly del 2026-10-06",
+  "fuente": "export de FormAssembly del 2026-10-06 (15:24)",
   "actualizado": "2026-10-06",
   "total_respuestas": 33,
-  "portafolio": 35,
-  "hallazgos": [
-   "Respondieron 33 de 35 (94%) organizaciones del portafolio. 32 de 33 (97%) leyeron su diagnóstico: para 22 de 32 (69%) coincide bastante, para 9 de 32 (28%) totalmente y para 1 poco.",
-   "Financiamiento y procuración de fondos es la prioridad principal: 12 de 33 (36%) la eligen como #1 y suma 28 pts, por delante de Recursos humanos y bienestar de los equipos (20 pts) y Comunicación y relaciones públicas (19 pts). Comunicación es tan mencionada como Financiamiento, 16 de 33 (48%), casi siempre como #2.",
-   "Lo que no quieren repetir: contenidos teóricos o genéricos, 19 de 31 (61%). Lo que sí les funcionó: el acompañamiento cercano, 17 de 33 (52%), y aprender haciendo con sus propios casos, 11 de 33 (33%).",
-   "Prefieren sesiones individuales con su organización, 27 de 33 (82%), y mentoría con una persona experta, 23 de 33 (70%), y 19 de 33 (58%) eligen combinar sesiones en vivo y a su ritmo. 19 de 33 (58%) podrían dedicar entre 2 y 4 horas al mes y 13 de 33 (39%) entre 5 y 8. En 16 de 33 (48%) deciden en conjunto en qué fortalecerse y en 9 de 33 (27%) decide la dirección general."
-  ]
+  "portafolio": 34,
+  "hallazgos": []
  },
  "categorias": {
   "necesidad": [
@@ -354,10 +352,12 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
    "Aprender haciendo con casos propios",
    "Aprendizaje entre pares",
    "Seguimiento y medición del avance",
-   "Formato claro y accesible"
+   "Formato claro y accesible",
+   "Participación de todo el equipo"
   ],
   "no": [
-   "Teoría o contenidos genéricos",
+   "Teoría poco aplicable",
+   "No se adapta a su realidad o nivel",
    "Demasiada carga para el equipo",
    "Falta de seguimiento o continuidad",
    "Formatos masivos o poco participativos",
@@ -390,7 +390,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Formato claro y accesible"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos"
+    "No se adapta a su realidad o nivel"
    ]
   },
   {
@@ -420,7 +420,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Aprendizaje entre pares"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos",
+    "No se adapta a su realidad o nivel",
     "Formatos masivos o poco participativos"
    ]
   },
@@ -482,7 +482,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Acompañamiento cercano y mentoría"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos",
+    "Teoría poco aplicable",
     "Demasiada carga para el equipo"
    ]
   },
@@ -538,7 +538,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Acompañamiento cercano y mentoría"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos"
+    "No se adapta a su realidad o nivel"
    ]
   },
   {
@@ -593,7 +593,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
    ],
    "no_tema": [
     "Demasiada carga para el equipo",
-    "Teoría o contenidos genéricos"
+    "No se adapta a su realidad o nivel"
    ]
   },
   {
@@ -618,7 +618,8 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "El diagnóstico ya lo refleja"
    ],
    "si_tema": [
-    "Acompañamiento cercano y mentoría"
+    "Acompañamiento cercano y mentoría",
+    "Participación de todo el equipo"
    ],
    "no_tema": [
     "Formatos masivos o poco participativos"
@@ -681,7 +682,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
    ],
    "no_tema": [
     "Demasiada carga para el equipo",
-    "Teoría o contenidos genéricos"
+    "No se adapta a su realidad o nivel"
    ]
   },
   {
@@ -709,7 +710,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Acompañamiento cercano y mentoría"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos"
+    "No se adapta a su realidad o nivel"
    ]
   },
   {
@@ -764,7 +765,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Aprendizaje entre pares"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos",
+    "Teoría poco aplicable",
     "Formatos masivos o poco participativos"
    ]
   },
@@ -795,7 +796,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Seguimiento y medición del avance"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos",
+    "No se adapta a su realidad o nivel",
     "Formatos masivos o poco participativos"
    ]
   },
@@ -852,7 +853,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Acompañamiento cercano y mentoría"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos",
+    "No se adapta a su realidad o nivel",
     "Falta de seguimiento o continuidad"
    ]
   },
@@ -877,7 +878,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Gobernanza, dirección y relevo"
    ],
    "si_tema": [
-    "Otros temas"
+    "Participación de todo el equipo"
    ],
    "no_tema": [
     "Falta de seguimiento o continuidad"
@@ -908,7 +909,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Formato claro y accesible"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos",
+    "No se adapta a su realidad o nivel",
     "Logística: horarios y traslados"
    ]
   },
@@ -936,13 +937,14 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
    "si_tema": [
     "Formato claro y accesible",
     "Aprendizaje entre pares",
-    "Aprender haciendo con casos propios"
+    "Aprender haciendo con casos propios",
+    "Participación de todo el equipo"
    ],
    "no_tema": [
     "Demasiada carga para el equipo",
     "Logística: horarios y traslados",
     "Formatos masivos o poco participativos",
-    "Teoría o contenidos genéricos"
+    "No se adapta a su realidad o nivel"
    ]
   },
   {
@@ -1029,7 +1031,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Acompañamiento cercano y mentoría"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos"
+    "No se adapta a su realidad o nivel"
    ]
   },
   {
@@ -1056,7 +1058,8 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Aprender haciendo con casos propios"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos",
+    "Teoría poco aplicable",
+    "No se adapta a su realidad o nivel",
     "Demasiada carga para el equipo"
    ]
   },
@@ -1116,7 +1119,8 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Seguimiento y medición del avance"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos"
+    "Teoría poco aplicable",
+    "No se adapta a su realidad o nivel"
    ]
   },
   {
@@ -1144,7 +1148,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
    ],
    "no_tema": [
     "Falta de seguimiento o continuidad",
-    "Teoría o contenidos genéricos"
+    "No se adapta a su realidad o nivel"
    ]
   },
   {
@@ -1172,7 +1176,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Aprender haciendo con casos propios"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos"
+    "Teoría poco aplicable"
    ]
   },
   {
@@ -1254,7 +1258,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Aprender haciendo con casos propios"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos"
+    "No se adapta a su realidad o nivel"
    ]
   },
   {
@@ -1282,7 +1286,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "Aprendizaje entre pares"
    ],
    "no_tema": [
-    "Teoría o contenidos genéricos"
+    "Teoría poco aplicable"
    ]
   },
   {
@@ -1307,7 +1311,7 @@ footer { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; 
     "El diagnóstico ya lo refleja"
    ],
    "si_tema": [
-    "Otros temas"
+    "Participación de todo el equipo"
    ],
    "no_tema": [
     "Falta de seguimiento o continuidad"
@@ -1337,48 +1341,70 @@ function barras(id, items, total, { ordenar = true, sufijo = 'organizaciones' } 
   const lista = ordenar ? [...items].sort((a, b) => b.count - a.count) : items;
   const max = Math.max(1, ...lista.map(i => i.count));
   $(id).innerHTML = lista.map(i => `
-    <div class="bar-row${i.count ? '' : ' cero'}" tabindex="0" data-tip="<b>${esc(i.label)}</b><br>${i.count} de ${total} ${sufijo} · ${pct(i.count, total)}%">
+    <div class="bar-row${i.count ? '' : ' cero'}" tabindex="0" data-tip="<b>${esc(i.label)}</b><br>${pct(i.count, total)}% · ${i.count} de ${total} ${sufijo}${i.extra ? '<br>' + i.extra : ''}">
       <span class="lbl">${esc(i.label)}</span>
-      <span class="val num"><b>${i.count}</b> · ${pct(i.count, total)}%</span>
+      <span class="val num">${!i.count && i.sec ? `solo secundario (${i.sec})` : `<b>${pct(i.count, total)}%</b> · ${i.count} org.`}</span>
       <div class="track"><div class="fill" style="width:${i.count / max * 100}%"></div></div>
     </div>`).join('');
 }
 
 let ROWS = [];
-let AREAS = [], AREAS_N = 0, ORDEN_PRIO = 'menciones';
+let AREAS = [], AREAS_N = 0, ORDEN_PRIO = 'p1';
 
 function pintarAreas(orden) {
   ORDEN_PRIO = orden;
-  const N = AREAS_N, porPuntaje = orden === 'puntaje';
-  const pts = x => x.uno.length * 2 + x.dos.length;
-  const val = x => porPuntaje ? pts(x) : x.total;
-  const lista = [...AREAS].sort((x, y) => val(y) - val(x) || y.uno.length - x.uno.length);
-  const max = Math.max(1, ...lista.map(val));
-  const w1 = porPuntaje ? 2 : 1;
-  $('areas').innerHTML = lista.map(x => `<div class="area">
-      <div class="area-head" data-tip="<b>${esc(x.a)}</b><br>#1: ${x.uno.length} · #2: ${x.dos.length}<br>${x.total} de ${N} organizaciones · ${pct(x.total, N)}%<br>Puntaje: ${pts(x)} pts">
+  const N = AREAS_N;
+  const tip = x => `<b>${esc(x.a)}</b><br>Como #1: ${pct(x.uno.length, N)}% · ${x.uno.length} org.<br>Como #2: ${pct(x.dos.length, N)}% · ${x.dos.length} org.<br>Total: ${pct(x.total, N)}% · ${x.total} de ${N} organizaciones`;
+  let lista, html;
+  if (orden === 'menciones') {
+    lista = [...AREAS].sort((x, y) => y.total - x.total || y.uno.length - x.uno.length || y.dos.length - x.dos.length);
+    const max = Math.max(1, ...lista.map(x => x.total));
+    html = lista.map(x => `<div class="area">
+      <div class="area-head" data-tip="${tip(x)}">
         <span class="lbl">${esc(x.a)}</span>
-        <span class="val num">${porPuntaje ? `<b>${pts(x)}</b> pts` : `<b>${x.total}</b> org.`} · ${x.uno.length} como #1 · ${x.dos.length} como #2</span>
-        <div class="track2"><div class="s1" style="width:${x.uno.length * w1 / max * 100}%"></div><div class="s2" style="width:${x.dos.length / max * 100}%"></div></div>
+        <span class="val num"><b>${pct(x.total, N)}%</b> · ${x.total} org. <span class="ley-sec">(${x.uno.length} como #1 · ${x.dos.length} como #2)</span></span>
+        <div class="track2"><div class="s1" style="width:${x.uno.length / max * 100}%"></div><div class="s2" style="width:${x.dos.length / max * 100}%"></div></div>
       </div>
     </div>`).join('');
-  $('nota-orden').textContent = porPuntaje ? 'Ordenado por puntaje: cada elección como #1 suma 2 puntos y cada #2 suma 1.' : 'Ordenado por total de organizaciones que mencionan el área (como #1 o #2).';
+  } else {
+    const k = orden === 'p1' ? 'uno' : 'dos', cls = orden === 'p1' ? 's1' : 's2';
+    lista = [...AREAS].sort((x, y) => y[k].length - x[k].length || y.total - x.total);
+    const max = Math.max(1, ...lista.map(x => x[k].length));
+    html = lista.map(x => `<div class="area">
+      <div class="area-head" data-tip="${tip(x)}">
+        <span class="lbl">${esc(x.a)}</span>
+        <span class="val num"><b>${pct(x[k].length, N)}%</b> · ${x[k].length} org.</span>
+        <div class="track2"><div class="${cls}" style="width:${x[k].length / max * 100}%"></div></div>
+      </div>
+    </div>`).join('');
+  }
+  $('areas').innerHTML = html;
+  $('leyenda-prio').style.display = orden === 'menciones' ? '' : 'none';
+  $('nota-orden').textContent = {
+    p1: `Organizaciones que eligieron cada área como prioridad #1 (sobre ${N}).`,
+    p2: `Organizaciones que eligieron cada área como prioridad #2 (sobre ${N}).`,
+    menciones: `Organizaciones que mencionan el área como #1 o #2 (sobre ${N}); cada organización cuenta una sola vez por área. Ordenado por total y, en empate, por quienes la eligieron como #1.`,
+  }[orden];
   document.querySelectorAll('#orden-prio .tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.orden === orden)));
 }
 document.getElementById('orden-prio').addEventListener('click', e => { const b = e.target.closest('.tab'); if (b) pintarAreas(b.dataset.orden); });
 
 function temas(k, rows) {
+  // Unidad: organizaciones. Cada barra cuenta cuántas organizaciones mencionan el tema (cada una, una sola vez por tema).
   const campo = k + '_tema';
   const lista = v => Array.isArray(v) ? v.filter(Boolean) : (v ? [v] : []);
   const ESPECIAL = 'El diagnóstico ya lo refleja';
-  const esp = rows.filter(r => lista(r[campo]).includes(ESPECIAL)).length;
-  const con = rows.filter(r => lista(r[campo]).some(t => t !== ESPECIAL));
+  const otras = r => [...new Set(lista(r[campo]).filter(t => t !== ESPECIAL))];
+  const con = rows.filter(r => otras(r).length);
+  const soloEsp = rows.filter(r => lista(r[campo]).includes(ESPECIAL) && !otras(r).length).length;
   const e = $('e-' + k);
-  if (e) { e.hidden = !esp; e.innerHTML = esp ? `<b>${esp} de ${rows.length}</b> organizaciones dicen que el diagnóstico ya refleja sus necesidades.` : ''; }
+  if (e) { e.hidden = !soloEsp; e.innerHTML = soloEsp ? `<b>${pct(soloEsp, rows.length)}% · ${soloEsp} de ${rows.length}</b> organizaciones dicen que el diagnóstico ya refleja sus necesidades y no mencionan otras.` : ''; }
   const orden = [...DATOS.categorias[k], 'Otros temas'];
-  const items = orden.map(c => ({ label: c, count: con.filter(r => lista(r[campo]).includes(c)).length })).filter(x => x.count);
-  $('n-' + k).textContent = `${con.length} de ${rows.length} organizaciones ${k === 'necesidad' ? 'mencionaron otras necesidades' : 'respondieron'}`;
-  barras('c-' + k, items, con.length, { sufijo: 'respuestas' });
+  const items = orden.map(c => ({ label: c, count: con.filter(r => otras(r).includes(c)).length })).filter(x => x.count);
+  $('n-' + k).textContent = k === 'necesidad'
+    ? `${pct(con.length, rows.length)}% · ${con.length} de ${rows.length} organizaciones mencionaron otras necesidades`
+    : `${pct(con.length, rows.length)}% · ${con.length} de ${rows.length} organizaciones respondieron`;
+  barras('c-' + k, items, con.length);
 }
 
 function render(datos) {
@@ -1391,7 +1417,6 @@ function render(datos) {
   const coinc = contar(conCoinc, 'coincide', OPC.coincide);
   const alto = coinc[2].count + coinc[3].count;
   const tiempos = contar(rows, 'tiempo', OPC.tiempo);
-  const tTop = [...tiempos].sort((a, b) => b.count - a.count)[0];
   const fechas = rows.map(r => r.fecha).filter(Boolean).sort();
 
   const PORT = Number(meta.portafolio) || 0;
@@ -1403,22 +1428,17 @@ function render(datos) {
   $('aviso').innerHTML = meta.es_prueba ? `Estos resultados usan <b>datos inventados de prueba</b> (${N} organizaciones ficticias). Se reemplazan por los reales al procesar el export de FormAssembly.` : '';
 
   $('kpis').innerHTML = [
-    PORT ? ['Organizaciones que respondieron', `${N} de ${PORT}`, '', `${pct(N, PORT)}% del portafolio · faltan ${Math.max(0, PORT - N)}`] : ['Organizaciones que respondieron', N, '', 'Una respuesta por organización'],
+    PORT ? ['Organizaciones que respondieron', `${N} de ${PORT}`, '', `${pct(N, PORT)}% de las organizaciones esperadas · ${PORT - N === 1 ? 'falta 1' : `faltan ${Math.max(0, PORT - N)}`}`] : ['Organizaciones que respondieron', N, '', 'Una respuesta por organización'],
     ['Leyeron su diagnóstico', `${pct(leyeron.length, N)}%`, '', `${leyeron.length} de ${N} organizaciones`],
     ['El diagnóstico coincide bastante o totalmente', `${pct(alto, conCoinc.length)}%`, '', `${alto} de ${conCoinc.length} que lo leyeron`],
-    ['Tiempo mensual más frecuente', tTop && tTop.count ? tTop.label : '—', 'txt', tTop && tTop.count ? `${tTop.count} organizaciones · ${pct(tTop.count, N)}%` : 'Sin respuestas'],
   ].map(([l, v, c, d]) => `<div class="kpi"><div class="k-lbl">${l}</div><div class="k-val num ${c}">${esc(v)}</div><div class="k-det">${d}</div></div>`).join('');
 
   // Coincidencia (ordinal)
   $('coinc-n').textContent = `Solo quienes leyeron el diagnóstico · ${conCoinc.length} organizaciones`;
   const tot = Math.max(1, conCoinc.length);
-  $('stack').innerHTML = coinc.filter(c => c.count).map((c, i) => `<div class="seg" style="flex:${c.count};background:var(--o${OPC.coincide.indexOf(c.label) + 1})" data-tip="<b>${c.label}</b><br>${c.count} de ${conCoinc.length} · ${pct(c.count, tot)}%"></div>`).join('') || '<div class="seg" style="flex:1;background:var(--pista)"></div>';
-  $('leyenda').innerHTML = coinc.map((c, i) => `<div class="ley"><span class="t"><span class="sw" style="background:var(--o${i + 1})"></span>${c.label}</span><span class="n num">${pct(c.count, tot)}%</span><span class="t num">${c.count} org.</span></div>`).join('');
+  $('stack').innerHTML = coinc.filter(c => c.count).map((c, i) => `<div class="seg" style="flex:${c.count};background:var(--o${OPC.coincide.indexOf(c.label) + 1})" data-tip="<b>${c.label}</b><br>${pct(c.count, tot)}% · ${c.count} de ${conCoinc.length} organizaciones"></div>`).join('') || '<div class="seg" style="flex:1;background:var(--pista)"></div>';
+  $('leyenda').innerHTML = coinc.filter(c => c.count).map(c => `<div class="ley"><span class="t"><span class="sw" style="background:var(--o${OPC.coincide.indexOf(c.label) + 1})"></span>${c.label}</span><span class="n num">${pct(c.count, tot)}%</span><span class="t num">${c.count} org.</span></div>`).join('');
 
-  // Hallazgos
-  const hall = (meta.hallazgos || []).filter(Boolean);
-  $('hallazgos').hidden = !hall.length;
-  $('hallazgos-lista').innerHTML = hall.map(x => `<li>${esc(x)}</li>`).join('');
 
   // ¿Leyeron? (dona)
   const segs = [
@@ -1430,23 +1450,36 @@ function render(datos) {
   const vis = segs.filter(s => s.count);
   const gap = vis.length > 1 ? 2 : 0;
   let off = 0;
-  const arcos = vis.map(s => { const len = s.count / totL * CIRC; const c = `<circle class="seg-d" cx="60" cy="60" r="${RAD}" stroke="${s.color}" stroke-dasharray="${Math.max(0.5, len - gap)} ${CIRC}" stroke-dashoffset="${-off}" data-tip="<b>${s.label}</b><br>${s.count} de ${N} organizaciones · ${pct(s.count, N)}%"></circle>`; off += len; return c; }).join('');
+  const arcos = vis.map(s => { const len = s.count / totL * CIRC; const c = `<circle class="seg-d" cx="60" cy="60" r="${RAD}" stroke="${s.color}" stroke-dasharray="${Math.max(0.5, len - gap)} ${CIRC}" stroke-dashoffset="${-off}" data-tip="<b>${s.label}</b><br>${pct(s.count, N)}% · ${s.count} de ${N} organizaciones"></circle>`; off += len; return c; }).join('');
   $('leyo-n').textContent = `${N} organizaciones`;
   $('dona').innerHTML = `<svg viewBox="0 0 120 120" role="img" aria-label="Leyeron su diagnóstico: ${segs.map(s => `${s.label} ${s.count}`).join(', ')}"><circle cx="60" cy="60" r="${RAD}" stroke="var(--pista)"></circle>${arcos}</svg><div class="centro"><b class="num">${pct(segs[0].count, N)}%</b><span>lo leyeron</span></div>`;
-  $('dona-ley').innerHTML = segs.filter((s, i) => i < 2 || s.count).map(s => `<div><span class="t"><span class="sw" style="background:${s.color}"></span>${s.label}</span><span class="n num">${s.count} <small style="font-size:13px;font-weight:600;color:var(--tinta-2)">· ${pct(s.count, N)}%</small></span></div>`).join('');
+  $('dona-ley').innerHTML = segs.filter((s, i) => i < 2 || s.count).map(s => `<div><span class="t"><span class="sw" style="background:${s.color}"></span>${s.label}</span><span class="n num">${pct(s.count, N)}% <small style="font-size:13px;font-weight:600;color:var(--tinta-3)">· ${s.count} org.</small></span></div>`).join('');
 
   // Palabras
   const pal = {};
   rows.forEach(r => { (Array.isArray(r.palabra) ? r.palabra : [r.palabra]).forEach(k0 => { const k = String(k0 ?? '').trim(); if (!k) return; const key = norm(k); pal[key] = pal[key] || { txt: k.charAt(0).toUpperCase() + k.slice(1), n: 0 }; pal[key].n++; }); });
   const pals = Object.values(pal).sort((a, b) => b.n - a.n || a.txt.localeCompare(b.txt));
   const maxP = Math.max(1, ...pals.map(p => p.n));
-  $('palabras').innerHTML = pals.map(p => `<span class="palabra${p.n === maxP && maxP > 1 ? ' top' : ''}" data-tip="<b>${esc(p.txt)}</b><br>${p.n} de ${N} organizaciones" style="font-size:${14 + (p.n - 1) / Math.max(1, maxP - 1) * 8}px">${esc(p.txt)}${p.n > 1 ? `<small class="num">×${p.n}</small>` : ''}</span>`).join('') || '<span class="vacio">Sin respuestas.</span>';
+  const tier = n => n === maxP && maxP > 1 ? 1 : n >= Math.max(2, maxP * 0.45) ? 2 : n >= 3 ? 3 : n === 2 ? 4 : 5;
+  // Orden de centro hacia afuera: el concepto más mencionado queda en el medio
+  const centro = [];
+  pals.forEach((p, i) => i % 2 ? centro.unshift(p) : centro.push(p));
+  let alt = 0;
+  $('palabras').innerHTML = centro.map(p => {
+    const t = tier(p.n), size = 15 + Math.sqrt((p.n - 1) / Math.max(1, maxP - 1)) * 27;
+    const extra = t === 5 && (alt++ % 2) ? ' alt' : '';
+    return `<span class="pal t${t}${extra}" tabindex="0" data-tip="<b>${esc(p.txt)}</b><br>${pct(p.n, N)}% · ${p.n} de ${N} organizaciones" style="font-size:${size.toFixed(1)}px">${esc(p.txt)}<sup class="num">×${p.n}</sup></span>`;
+  }).join('') || '<span class="vacio">Sin respuestas.</span>';
+  const tiers = [[1, 'var(--rojo)', 'El más mencionado'], [2, 'var(--rojo-tinta)', `${Math.max(2, Math.ceil(maxP * 0.45))} o más`], [3, 'var(--o4)', '3 a 4'], [4, 'var(--o2)', '2'], [5, 'var(--tinta-2)', '1']]
+    .filter(([t]) => pals.some(p => tier(p.n) === t));
+  $('nube-ley').innerHTML = pals.length ? 'Organizaciones que lo mencionan: ' + tiers.map(([, c, l]) => `<span><i style="background:${c}"></i>${l}</span>`).join('') : '';
 
   // Áreas: #1 y #2 juntas
   AREAS = OPC.prioridades.map(a => {
     const uno = rows.filter(r => norm(r.p1) === norm(a)), dos = rows.filter(r => norm(r.p2) === norm(a));
     return { a, uno, dos, total: uno.length + dos.length };
   });
+  AREAS = AREAS.filter(x => x.a !== 'Otra' || x.total);
   AREAS_N = N;
   pintarAreas(ORDEN_PRIO);
   const sinP2 = rows.filter(r => !r.p2).length;
@@ -1456,7 +1489,7 @@ function render(datos) {
   barras('modalidad', contar(rows, 'modalidad', OPC.modalidad), N);
 
   const maxT = Math.max(1, ...tiempos.map(t => t.count));
-  $('tiempo').innerHTML = tiempos.map(t => `<div class="col" data-tip="<b>${t.label}</b><br>${t.count} de ${N} organizaciones · ${pct(t.count, N)}%"><span class="c-val num">${t.count}</span><div class="c-bar" style="height:${t.count / maxT * 78}%"></div></div>`).join('');
+  $('tiempo').innerHTML = tiempos.map(t => `<div class="col" data-tip="<b>${t.label}</b><br>${pct(t.count, N)}% · ${t.count} de ${N} organizaciones"><span class="c-val num">${pct(t.count, N)}%<small style="display:block;font-size:12px;font-weight:600;color:var(--tinta-3);text-align:center">${t.count} org.</small></span><div class="c-bar" style="height:${t.count / maxT * 78}%"></div></div>`).join('');
   $('tiempo-lbls').innerHTML = tiempos.map(t => `<span>${t.label}</span>`).join('');
 
   ['necesidad', 'si', 'no'].forEach(k => temas(k, rows));
